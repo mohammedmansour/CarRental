@@ -66,7 +66,6 @@ car_color()
 ###################################
 # this Object to determine the veihcle information
 
-#class veihcle_info(osv.osv):
 class car_rental(osv.osv):
 
     _name='car.rental'
@@ -77,7 +76,8 @@ class car_rental(osv.osv):
               'car_make_id': fields.many2one('car.make', 'Vehicle Make'),
               'car_brand_id': fields.many2one('car.brand', 'Vehicle Brand'),
               'car_class_id': fields.many2one('car.class', 'Vehicle Class'),
-              'car_color_id': fields.many2one('car.color', 'Vehicle Color'),              
+              'car_color_id': fields.many2one('car.color', 'Vehicle Color'),
+              'product_image': fields.binary('Image' , 'Vehicle Image'),  #inherited from product.product             
               'notes':fields.text('Details'),
               
               'name':fields.char('Vehicle Name',size=20,required=True),
@@ -152,8 +152,6 @@ car_rental()
 
 class car_rental_contract(osv.osv):
     _name='car.rental.contract'
-    #_inherits = {'product.product': 'product_id'}
-    #_inherit='product.product'
     _description='Module for Car Rental Management'
 	
 	#this method to autocomlete the vehicle information by vehicle_id
