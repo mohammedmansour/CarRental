@@ -97,14 +97,15 @@
                 <form string="car_result">
 		            
 			        <field name="customer_id"/>
-			        <field name="veihcle_id"/>
+					<field name="veihcle_id" on_change="onchange_veihcle_id(veihcle_id)"/>			        
 			        <field name="car_make" /> 
                     <field name="car_brand" /> 
 					<field name="car_class" /> 
-					<field name="car_color" /> 
-		            <field name="cost"/>
-                    <field name="rent_start_date"/>
+					<field name="car_color" />
+                    <separator string="Rental Information" colspan="4" />					
+					<field name="rent_start_date"/>
                     <field name="rent_end_date"/>
+		            <field name="cost"/>                    
                     <field name="rent_state"/>
                     <field name="notes"/>
                     

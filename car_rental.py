@@ -132,8 +132,7 @@ class car_rental(osv.osv):
               'fueltankcap':fields.float('Fuel Tank Capacity'),
               'warrexp':fields.date('Date',help="Expiry date for warranty of product"),
               'warrexpmil':fields.integer('(or) Mileage',help="Expiry mileage for warranty of product"),         
-		      'veihcle_id': fields.one2many('car.rental.contract', 'veihcle_id' , 'Veihcle To Rent'),
-                                  
+		      'veihcle_id': fields.one2many('car.rental.contract', 'veihcle_id' , 'Veihcle To Rent'),                              
               
     }
     _defaults = {
@@ -155,31 +154,39 @@ class car_rental_contract(osv.osv):
     _name='car.rental.contract'
     #_inherits = {'product.product': 'product_id'}
     #_inherit='product.product'
-    _description='Module for Car Rental Management'	
+    _description='Module for Car Rental Management'
+	
+	#this method to autocomlete the vehicle information by vehicle_id
+    def onchange_veihcle_id(self, cr, uid, ids, vehicle_id):
+		val={}
+		if vehicle_id:
+			vehicle=self.pool.get('car.rental').browse(cr,uid,vehicle_id)
+			val['car_make']=vehicle.car_make_id.name			
+			val['car_brand']=vehicle.car_brand_id.name
+			val['car_class']=vehicle.car_class_id.name
+			val['car_color']=vehicle.car_color_id.name
+		return {'value':val}
+		
     _columns={
-              'customer_id': fields.many2one('res.partner', 'Renter Name'),
-			  'veihcle_id':  fields.many2one('car.rental', 'Veihcle To Rent'),
+              'customer_id': fields.many2one('res.partner', 'Renter Name', required=True),
+			  'veihcle_id':  fields.many2one('car.rental', 'Veihcle To Rent', required=True),
 			  ############ AutoComplete this fields ################
 			  #type='many2one',relation='car.make',
-			  'car_make': fields.related('veihcle_id', 'car_make_id', readonly=True , type='char', string='Vehicle Make'),
-			  'car_brand': fields.related('veihcle_id', 'car_brand_id', readonly=True , type='char', string='Vehicle Brand'),
-			  'car_class': fields.related('veihcle_id', 'car_class_id', readonly=True , type='char', string='Vehicle Class'),
-			  'car_color': fields.related('veihcle_id', 'car_color_id', readonly=True , type='char', string='Vehicle Color'),
-			  
+			  'car_make':fields.char('Car Make', size=50, readonly=True),
+			  'car_brand':fields.char('Car Brand', size=50, readonly=True),
+			  'car_class':fields.char('Car Class', size=50, readonly=True),
+			  'car_color':fields.char('Car Color', size=50, readonly=True),
+			  #'car_make': fields.related('veihcle_id', 'car_make_id', readonly=True , type='char', string='Vehicle Make'),			  			  
 			  ############
-              'cost':fields.float('Rent Cost',help='This fiels to determine the cost of rent per hour'),
+              'cost':fields.float('Rent Cost',help='This fiels to determine the cost of rent per hour', required=True),
               'rent_start_date': fields.date('Rent Start Date', required=True),
               'rent_end_date':fields.date('Rent End Date', required=True),
               'rent_state':fields.selection([('cancelled','Cancelled'),('running','Running'),('finished','Finished')],'Rent State'),              
-              'notes':fields.text('Details'),
-                                                
+              'notes':fields.text('Details'),                                                
     }
     _defaults = {
         'rent_state' : lambda *a : 'running',        
         'rent_start_date': lambda *a: time.strftime('%Y-%m-01'),
-        'rent_end_date': lambda *a: str(datetime.now() + relativedelta.relativedelta(months=+1, day=1, days=-1))[:10],
-        
+        'rent_end_date': lambda *a: str(datetime.now() + relativedelta.relativedelta(months=+1, day=1, days=-1))[:10],        
     }
-	
-
 car_rental_contract()
