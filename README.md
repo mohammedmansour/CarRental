@@ -1,0 +1,10 @@
+CarRental
+=========
+
+It is an OpenERP Module to automate the Cars Rental Process
+
+You must add this 2 lines to the ../product/product.py in the _columns sction :
+
+    'car_rental_id': fields.one2many('car.rental', 'product_id' , 'Product'),
+  	'customer_id': fields.one2many('car.rental.contract', 'customer_id' , 'Renter Name'),
+    
