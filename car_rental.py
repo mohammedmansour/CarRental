@@ -66,7 +66,6 @@ car_color()
 ###################################
 # this Object to determine the veihcle information
 
-#class veihcle_info(osv.osv):
 class car_rental(osv.osv):
 
     _name='car.rental'
@@ -153,8 +152,6 @@ car_rental()
 
 class car_rental_contract(osv.osv):
     _name='car.rental.contract'
-    #_inherits = {'product.product': 'product_id'}
-    #_inherit='product.product'
     _description='Module for Car Rental Management'
 	
 	#this method to autocomlete the vehicle information by vehicle_id
