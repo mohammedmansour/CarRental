@@ -1,7 +1,7 @@
 {
   
    'name' : 'Car Rental Module',
-   'authod' : 'Mohammed Mansour',
+   'author' : 'Mohammed Mansour',
    'website':'https://www.github.com//mohammedmansour',
    'version' : '1.0',
    'description' : '''This is a module for automating the car rental process''',

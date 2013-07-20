@@ -77,7 +77,8 @@ class car_rental(osv.osv):
               'car_make_id': fields.many2one('car.make', 'Vehicle Make'),
               'car_brand_id': fields.many2one('car.brand', 'Vehicle Brand'),
               'car_class_id': fields.many2one('car.class', 'Vehicle Class'),
-              'car_color_id': fields.many2one('car.color', 'Vehicle Color'),              
+              'car_color_id': fields.many2one('car.color', 'Vehicle Color'),
+              'product_image': fields.binary('Image' , 'Vehicle Image'),  #inherited from product.product             
               'notes':fields.text('Details'),
               
               'name':fields.char('Vehicle Name',size=20,required=True),
