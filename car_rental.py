@@ -11,7 +11,7 @@ import decimal_precision as dp
 
 
 ###################################
-#This Object to specify the veihcle make
+##This Object to specify the veihcle make
 
 class car_make(osv.osv):
     _name='car.make'
@@ -24,7 +24,7 @@ class car_make(osv.osv):
 car_make()  
 
 ###################################
-#This Object to specify the veihcle brand
+##This Object to specify the veihcle brand
 
 class car_brand(osv.osv):
     _name='car.brand'
